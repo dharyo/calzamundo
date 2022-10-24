@@ -25,6 +25,9 @@ public class Ventas {
 @OneToMany( targetEntity = Calzado.class)
 private ArrayList<Calzado> calzadoList;
 
+@OneToOne
+private Usuarios usuario;
 
-    
+@OneToOne
+private Cliente cliente;
 }

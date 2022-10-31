@@ -9,7 +9,7 @@ import org.springframework.data.repository.query.Param;
 import com.calzamundoshoes.calzamundo.entity.Usuarios;
 
 
-public interface UsuariosRepository extends JpaRepository<Usuarios, Long>{
+public interface IUsuariosRepository extends JpaRepository<Usuarios, Long>{
     
     @Query("FROM usuarios u WHERE u.nombreUsuario LIKE :name")
     public List<Usuarios> findByNameContaining(@Param("name") String name);

@@ -10,12 +10,12 @@ import com.calzamundoshoes.calzamundo.entity.Calzado;
 
 public interface ICalzadoRepository extends JpaRepository<Calzado, Long>{
 
-    @Query("FROM calzado c WHERE c.nombreCalzado LIKE :name")
+    @Query("FROM Calzado c WHERE c.nombreCalzado LIKE :name")
     public List<Calzado> findByNameContaining(@Param("name") String name);
 
-    @Query("FROM calzado c WHERE c.valorCalzado <=totalVenta")
+    @Query(value ="FROM Calzado c WHERE c.valorCalzado <=totalVenta", nativeQuery = true)
     List<Calzado> findByValorCalzado(@Param("totalVenta") String totalVenta);
 
-    @Query("FROM calzado c ORDER BY nombreCalzado ASC")
+    @Query(value= "FROM Calzado c ORDER BY nombreCalzado ASC", nativeQuery = true)
     public List<Calzado> findAllSortByName();
 }

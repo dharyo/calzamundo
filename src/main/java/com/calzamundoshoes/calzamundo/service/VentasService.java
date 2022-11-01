@@ -23,7 +23,7 @@ public class VentasService implements IVentasService {
 
     @Override
     public List<Ventas> getVentasByDate(String date){
-        return ventasRepository.findByTitleContaining(date);
+        return ventasRepository.findByDateContaining(date);
     }
 
     @Override

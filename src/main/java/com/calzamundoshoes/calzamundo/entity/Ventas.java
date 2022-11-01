@@ -1,6 +1,6 @@
 package com.calzamundoshoes.calzamundo.entity;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -23,7 +23,7 @@ public class Ventas {
 
 
 @OneToMany( targetEntity = Calzado.class)
-private ArrayList<Calzado> calzadoList;
+private List<Calzado> calzadoList;
 
 @OneToOne
 private Usuarios usuario;

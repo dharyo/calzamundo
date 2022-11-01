@@ -11,6 +11,6 @@ import com.calzamundoshoes.calzamundo.entity.Usuarios;
 
 public interface IUsuariosRepository extends JpaRepository<Usuarios, Long>{
     
-    @Query("FROM usuarios u WHERE u.nombreUsuario LIKE :name")
+    @Query("FROM Usuarios u WHERE u.nombreUsuario LIKE :name")
     public List<Usuarios> findByNameContaining(@Param("name") String name);
 }

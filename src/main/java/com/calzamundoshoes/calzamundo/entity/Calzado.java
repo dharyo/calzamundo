@@ -24,6 +24,9 @@ public class Calzado {
     @Column(name = "descripcion")
     private String descripcion;
 
+    @Column(name = "tallaCalzado")
+    private int tallaCalzado;
+
     @ManyToOne()
     @JoinColumn(name = "idVentas")
     private Ventas ventas; 

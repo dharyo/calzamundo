@@ -22,5 +22,7 @@ public class Usuarios {
     @Column(name = "nombreEmpleado")
     private String nombreEmpleado;
 
+    @Column(name = "contraseña")
+    private String contraseñaEmpleado;
 
 }

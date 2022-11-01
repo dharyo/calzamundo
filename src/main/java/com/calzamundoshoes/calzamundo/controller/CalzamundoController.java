@@ -4,6 +4,9 @@ package com.calzamundoshoes.calzamundo.controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 //import com.calzamundoshoes.calzamundo.service.CalzadoService;
+import org.springframework.stereotype.Controller;
+
+@Controller
 
 public class CalzamundoController {
 
@@ -40,4 +43,11 @@ public class CalzamundoController {
     public String ventas() {
         return "sales";
     }
+     @RequestMapping("/inventory")
+    public String inventario() {
+        return "inventory";
+    }
 }
+
+
+ 

@@ -10,8 +10,8 @@ import java.util.List;
 
 public interface IVentasRepository extends JpaRepository<Ventas, Long>{
     
-    @Query("FROM ventas v Where v.fechaVenta like :title")
-    List<Ventas> findByTitleContaining(@Param("title") String title);
+    @Query("FROM Ventas v Where v.fechaVenta like :date")
+    List<Ventas> findByDateContaining(@Param("date") String date);
 
     @Query("FROM Ventas v WHERE v.totalVenta <=totalVenta")
     List<Ventas> findByTotalVenta(@Param("totalVenta") String totalVenta);

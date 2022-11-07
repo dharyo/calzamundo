@@ -136,16 +136,4 @@ public class CalzamundoController {
     public String iniciarSesion() {
         return "login";
     }
-
-    /*
-     * @RequestMapping("/sales")
-     * public String ventas() {
-     * return "sales";
-     * }
-     * 
-     * @RequestMapping("/inventory")
-     * public String inventario() {
-     * return "inventory";
-     * }
-     */
 }

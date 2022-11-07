@@ -1,12 +1,13 @@
 package com.calzamundoshoes.calzamundo.controller;
 
+import java.io.Console;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import com.calzamundoshoes.calzamundo.entity.*;
+import com.calzamundoshoes.calzamundo.service.*;
 
-import com.calzamundoshoes.calzamundo.service.VentasService;
-
+import antlr.collections.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,67 +17,135 @@ import org.springframework.ui.Model;
 public class CalzamundoController {
 
     @Autowired
-    private VentasService ventasService;
-    
+    private SaleService saleService;
+    @Autowired
+    private ProductService productService;
+    @Autowired
+    private CustomerService customerService;
+    @Autowired
+    private UserService userService;
 
-    //private List<>
+    public CalzamundoController(ProductService productService) {
+        this.productService = productService;
 
-    public CalzamundoController(VentasService ventasService){
-        this.ventasService = ventasService;
     }
 
+    /*
+     * public CalzamundoController(ProductService productService, UserService
+     * userService) {
+     * this.productService = productService;
+     * this.userService = userService;
+     * 
+     * }
+     */
 
-   
+    public CalzamundoController() {
 
-    @RequestMapping ("/")
+    }
+
+    /*
+     * @GetMapping("/logout")
+     * 
+     * }@GetMapping("/validateUser"){
+     * 
+     * }
+     */
+
+    @RequestMapping("/")
     public String index() {
         return "index";
     }
 
-    @RequestMapping ("/index")
-    public String index2() {
-        return "index";
-    }
-
-    @RequestMapping ("/home")
+    @RequestMapping("/home")
     public String home() {
         return "home";
     }
-    
+
+    @GetMapping("/products")
+    public String listProducts(Model model) {
+        model.addAttribute("product", productService.getAllProducts());
+        return "products";
+    }
+
+    @GetMapping("/inventory")
+    public String listProductsInventory(Model model) {
+        model.addAttribute("product", productService.getAllProducts());
+        return "inventory";
+    }
+
+    @GetMapping("/sales")
+    public String listProductsSales(Model model) {
+        model.addAttribute("product", productService.getAllProducts());
+        return "sales";
+    }
+
+    @GetMapping("/sales/{id}")
+    public String calculateSale(@PathVariable Long id, @ModelAttribute("product") Product product, Model model) {
+        Product existentProduct = productService.getProductByIdProduct(id);
+
+        int price = Integer.parseInt(existentProduct.getPriceProduct()) * 5;
+        System.out.println(price);
+
+        return "redirect:/sales";
+    }
+
+    @GetMapping("/create")
+    public String createProductsForm(Model model) {
+        Product product = new Product();
+        model.addAttribute("product", product);
+        return "create_shoes";
+    }
+
+    @PostMapping("/products")
+    public String saveProducts(@ModelAttribute("product") Product product) {
+        productService.saveProduct(product);
+        return "products";
+    }
+
+    @GetMapping("/update/{id}")
+    public String editProductForm(@PathVariable Long id, Model model) {
+        System.out.println("entro a update");
+
+        Product product = productService.getProductByIdProduct(id);
+        model.addAttribute("product", product);
+        return "update_shoes";
+    }
+
+    @PostMapping("/products/{id}")
+    public String updateProduct(@PathVariable Long id, @ModelAttribute("product") Product product, Model model) {
+        Product existentProduct = productService.getProductByIdProduct(id);
+
+        existentProduct.setIdProduct(id);
+        existentProduct.setNameProduct(product.getNameProduct());
+        existentProduct.setDescripcionProduct(product.getDescripcionProduct());
+        existentProduct.setTypeProduct(product.getTypeProduct());
+        existentProduct.setSizeProduct(product.getSizeProduct());
+        existentProduct.setPriceProduct(product.getPriceProduct());
+
+        productService.updateProduct(existentProduct);
+        return "redirect:/products";
+    }
+
+    @GetMapping("/products/{id}")
+    public String deleteProduct(@PathVariable Long id) {
+        productService.deleteProductById(id);
+        return "redirect:/products";
+    }
+
     @RequestMapping("/login")
     public String iniciarSesion() {
         return "login";
     }
 
-    @GetMapping("/products")
-    public String productos() {
-        return "products";
-    }
-
-    @GetMapping("/create")
-    public String crear() {
-        return "create_shoes";
-    }
-
-    @GetMapping("/update")
-    public String actualizar() {
-        return "update_shoes";
-    }
-
-    @GetMapping("/sales")
-    public String ventas() {
-        return "sales";
-    }
-     @GetMapping("/inventory")
-    public String inventario() {
-        return "inventory";
-    }
-
-    @GetMapping("/contact")
-    public String contacto() {
-        return "contact";
-    }
+    /*
+     * @RequestMapping("/sales")
+     * public String ventas() {
+     * return "sales";
+     * }
+     * 
+     * @RequestMapping("/inventory")
+     * public String inventario() {
+     * return "inventory";
+     * }
+     */
 }
-
-
- 

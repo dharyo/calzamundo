@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.tymeleaf.org" lang="en">
   <head>
     <meta charset="utf-8" />
     <meta
@@ -63,8 +63,8 @@
     <!--Inicio del contenedor general-->
     <div class="container mt-4">
       <div class="row">
-        <h1>Calzado</h1>
-      </div>
+        <h1>Inventario</h1>
+     </div>
     </div>
     <!--Fin del contenedor general-->
     <!--Inicio de la tabla-->
@@ -72,32 +72,22 @@
       <table class="table table-striped table-bordered">
         <thead class="table-dark">
           <tr>
-            <th>Imagen</th>
+            
             <th>Tipo</th>
-            <th>Marca</th>
+            <th>Nombre</th>
+            <th>Talla</th>
             <th>Cantidad</th>
-            <th>Valor unidad</th>
+            
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>
-              <img src="../static/img/imgCalzado.JPG" />
-            </td>
-            <td>Tennis</td>
-            <td>Adidas</td>
-            <td>5</td>
-            <td>58000</td>
-          </tr>
-          <tr>
-            <td>
-              <img src="../static/img/imgCalzado.JPG" />
-            </td>
-            <td>Tennis</td>
-            <td>Nike</td>
-            <td>18</td>
-            <td>110000</td>
-          </tr>
+          <tr  th:each="prod:${product}"> 
+            <td th:text="${prod.typeProduct}"></td>
+            <td th:text="${prod.nameProduct}"></td>
+            <td th:text="${prod.sizeProduct}"></td>
+            <td th:text="${prod.amountProduct}"></td>
+            
+         </tr>
         </tbody>
       </table>
     </div>
@@ -115,8 +105,9 @@
             <img
               src="../static/img/logoCalzamundo.png"
               alt=""
-              style="height: 120px; width: 80px"
-            />
+
+              style="height: 120px; width: 180px"
+           />
           </div>
         </div>
         <div class="col-auto">

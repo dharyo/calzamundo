@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html  xmlns="http://www.tymeleaf.org" lang="en">
   <head>
     <meta charset="utf-8" />
     <meta
@@ -77,7 +77,7 @@
                   aria-labelledby="navbarDropdownPortfolio"
                 >
                   <li>
-                    <a class="dropdown-item" href="/index"
+                    <a class="dropdown-item" href="/"
                       >Salir</a
                     >
                   </li>
@@ -98,36 +98,36 @@
           <div class="card-body">
             <h1 class="card-title">Calcular Venta</h1>
 
-            <div class="d-grid4">
-              <select>
-                <option value="0">Seleccionar Calzado</option>
-                <option value="1">Bota brahma</option>
-                <option value="2">Zapato Gucci</option>
-                <option value="3">Sandalias adidas Estilo Mikey Mouse</option>
+            <div class="d-grid4 form group">
+              <select
+              
+              class="form-control"
+              >
+                <option 
+                th:each="prod:${product}"
+                th:value="${prod.idProduct}"
+                th:text="${prod.nameProduct}"
+                >Seleccionar Calzado</option>
+                
               </select>
-
-              <select>
-                <option value="0">Seleccionar Tipo</option>
-                <option value="1">Bota</option>
-                <option value="2">Zapato</option>
-                <option value="3">Zandalia</option>
-              </select>
-
               <input
                 class="contactus"
                 placeholder="Cantidad"
                 type="Search"
-                name="Search"
+                name="amount_sale"
               />
 
-              <button
+              <a
                 class="btn btn-primary btn-lg disabled"
-                id="submitButton"
-                type="submit"
+               
               >
-                Añadir
-              </button>
+                Calcular
+            </a>
+
+              <br>
+              <label ></label>
             </div>
+         
             <br /><br /><br />
             <br /><br /><br />
           </div>

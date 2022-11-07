@@ -2,18 +2,21 @@ package com.calzamundoshoes.calzamundo.service;
 
 import java.util.List;
 
+//import org.springframework.security.core.userdetails.UserDetails;
+//import org.springframework.security.core.userdetails.UserDetailsService;
+
 import com.calzamundoshoes.calzamundo.entity.User;
 
-public interface IUserService {
+public interface IUserService /* extends UserDetailsService */ {
 
-    List<User> getAllCustomers();
+    List<User> getAllUsers();
 
-    User saveCustomers(User customer);
+    User saveUsers(User user);
 
-    User getCustomerById(Long id);
+    User getUserById(Long id);
 
-    User updateCustomer(User customer);
+    User updateUser(User user);
 
-    void deleteCustomerById(Long id);
+    void deleteUserById(Long id);
 
 }

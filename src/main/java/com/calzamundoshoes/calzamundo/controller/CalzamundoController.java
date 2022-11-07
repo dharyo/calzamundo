@@ -25,27 +25,31 @@ public class CalzamundoController {
     @Autowired
     private UserService userService;
 
-    // private List<>
-
-    /*
-     * public CalzamundoController(VentasService ventasService, CalzadoService
-     * calzadoService,
-     * ClienteService clienteService, UsuariosService usuarioService) {
-     * this.ventasService = ventasService;
-     * this.calzadoService = calzadoService;
-     * this.clienteService = clienteService;
-     * this.usuarioService = usuarioService;
-     * }
-     */
-
     public CalzamundoController(ProductService productService) {
         this.productService = productService;
 
     }
 
+    /*
+     * public CalzamundoController(ProductService productService, UserService
+     * userService) {
+     * this.productService = productService;
+     * this.userService = userService;
+     * 
+     * }
+     */
+
     public CalzamundoController() {
 
     }
+
+    /*
+     * @GetMapping("/logout")
+     * 
+     * }@GetMapping("/validateUser"){
+     * 
+     * }
+     */
 
     @RequestMapping("/")
     public String index() {
@@ -63,7 +67,27 @@ public class CalzamundoController {
         return "products";
     }
 
-    // create new shoe
+    @GetMapping("/inventory")
+    public String listProductsInventory(Model model) {
+        model.addAttribute("product", productService.getAllProducts());
+        return "inventory";
+    }
+
+    @GetMapping("/sales")
+    public String listProductsSales(Model model) {
+        model.addAttribute("product", productService.getAllProducts());
+        return "sales";
+    }
+
+    @GetMapping("/sales/{id}")
+    public String calculateSale(@PathVariable Long id, @ModelAttribute("product") Product product, Model model) {
+        Product existentProduct = productService.getProductByIdProduct(id);
+
+        int price = Integer.parseInt(existentProduct.getPriceProduct()) * 5;
+        System.out.println(price);
+
+        return "redirect:/sales";
+    }
 
     @GetMapping("/create")
     public String createProductsForm(Model model) {
@@ -89,8 +113,6 @@ public class CalzamundoController {
 
     @PostMapping("/products/{id}")
     public String updateProduct(@PathVariable Long id, @ModelAttribute("product") Product product, Model model) {
-        System.out.println("entro a post mapping");
-
         Product existentProduct = productService.getProductByIdProduct(id);
 
         existentProduct.setIdProduct(id);
@@ -116,21 +138,6 @@ public class CalzamundoController {
     }
 
     /*
-     * @RequestMapping("/products")
-     * public String productos() {
-     * return "products";
-     * }
-     * 
-     * @RequestMapping("/create")
-     * public String crear() {
-     * return "create_shoes";
-     * }
-     * 
-     * @RequestMapping("/update")
-     * public String actualizar() {
-     * return "update_shoes";
-     * }
-     * 
      * @RequestMapping("/sales")
      * public String ventas() {
      * return "sales";

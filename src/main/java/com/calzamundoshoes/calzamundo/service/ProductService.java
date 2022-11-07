@@ -5,8 +5,6 @@ import org.springframework.stereotype.Service;
 import com.calzamundoshoes.calzamundo.Repository.IProductRepository;
 import com.calzamundoshoes.calzamundo.entity.Product;
 
-import net.bytebuddy.asm.Advice.Return;
-
 @Service
 public class ProductService implements IProductService {
 
@@ -32,11 +30,6 @@ public class ProductService implements IProductService {
     @Override
     public Product saveProduct(Product product) {
         return productRepository.save(product);
-    }
-
-    @Override
-    public Product getProductByIdProduct(Long id) {
-        return productRepository.findById(id).get();
     }
 
     @Override

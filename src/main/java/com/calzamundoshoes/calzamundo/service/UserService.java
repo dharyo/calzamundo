@@ -2,6 +2,8 @@ package com.calzamundoshoes.calzamundo.service;
 
 import java.util.List;
 
+//import org.springframework.security.core.userdetails.UserDetails;
+//import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.calzamundoshoes.calzamundo.Repository.IUserRepository;
@@ -16,29 +18,52 @@ public class UserService implements IUserService {
         this.usersRepository = usersRepository;
     }
 
+    /*
+     * @Override
+     * public UserDetails loadUserByUsername(String username) throws
+     * UsernameNotFoundException {
+     * User user = usersRepository.findByEmail(username);
+     * 
+     * 
+     * if (user == null) {
+     * throw new UsernameNotFoundException("Usuario o contraseña inválidos");
+     * }
+     * return new user;
+     * 
+     * }
+     */
+
     @Override
-    public List<User> getAllCustomers() {
+    public List<User> getAllUsers() {
         return usersRepository.findAll();
     }
 
     @Override
-    public User saveCustomers(User customer) {
-        return usersRepository.save(customer);
+    public User saveUsers(User User) {
+        return usersRepository.save(User);
     }
 
     @Override
-    public User getCustomerById(Long id) {
+    public User getUserById(Long id) {
         return usersRepository.findById(id).get();
     }
 
     @Override
-    public User updateCustomer(User customer) {
-        return usersRepository.save(customer);
+    public User updateUser(User user) {
+        return usersRepository.save(user);
     }
 
     @Override
-    public void deleteCustomerById(Long id) {
+    public void deleteUserById(Long id) {
         usersRepository.deleteById(id);
     }
+    /*
+     * @Override
+     * public UserDetails loadUserByUsername(String username) throws
+     * UsernameNotFoundException {
+     * // TODO Auto-generated method stub
+     * return null;
+     * }
+     */
 
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html  xmlns="http://www.tymeleaf.org" lang="en">
   <head>
     <meta charset="utf-8" />
     <meta
@@ -98,12 +98,19 @@
           <div class="card-body">
             <h1 class="card-title">Calcular Venta</h1>
 
-            <div class="d-grid4">
-              <select>
-                <option value="0">Seleccionar Calzado</option>
-                <option value="1">Bota brahma</option>
-                <option value="2">Zapato Gucci</option>
-                <option value="3">Sandalias adidas Estilo Mikey Mouse</option>
+            <div class="d-grid4 form group">
+              <select
+              th:field="${calzado.nombre}"
+              name="nombre"
+              class="form-control"
+              >
+                <option 
+                th:each="${calzado.nombre}"
+                th:value="${calzado.id}"
+                th:text="${calzado.nombre}"
+                
+                >Seleccionar Calzado</option>
+                
               </select>
 
               <select>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.tymeleaf.org" lang="en">
   <head>
     <meta charset="utf-8" />
     <meta
@@ -67,7 +67,10 @@
       </div>
       <div class="row">
         <div class="col-lg-3">
-          <a class="btn btn-primary btn-sm mb-3">Agregar</a>
+          <a 
+          th:href="@{/create}"
+ 
+          class="btn btn-primary btn-sm mb-3">Agregar</a>
         </div>
       </div>
     </div>
@@ -79,20 +82,36 @@
           <tr>
             <th>Imagen</th>
             <th>Tipo</th>
-            <th>Marca</th>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Talla</th>
+            <th>Valor</th>
             <th>Acciones</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
+          <tr  th:each="prod:${product}">
             <td>
               <img src="../static/img/imgCalzado.JPG" />
             </td>
-            <td>Tennis</td>
-            <td>Adidas</td>
+            <td th:text="${prod.typeProduct}"></td>
+            <td th:text="${prod.nameProduct}"></td>
+            <td th:text="${prod.descripcionProduct}"></td>
+            <td th:text="${prod.sizeProduct}"></td>
+            <td th:text="${prod.priceProduct}"></td>
+           
+
             <td>
-              <a class="btn btn-primary">Actualizar</a>
-              <a class="btn btn-danger">Borrar</a>
+              <a
+                th:href="@{/update/{id}(id=${prod.idProduct})}"
+                class="btn btn-primary"
+                >Actualizar</a
+              >
+               <a
+               th:href="@{/products/{id}(id=${prod.idProduct})}"
+               class="btn btn-danger"
+               >Borrar</a
+             >
             </td>
           </tr>
         </tbody>
@@ -112,7 +131,7 @@
             <img
               src="../static/img/logoCalzamundo.png"
               alt=""
-              style="height: 120px; weigth: 80px"
+              style="height: 120px; width: 180px"
             />
           </div>
         </div>

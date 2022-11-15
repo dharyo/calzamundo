@@ -42,4 +42,9 @@ public class ProductService implements IProductService {
         productRepository.deleteById(id);
     }
 
+    @Override
+    public Product getProductByIdProduct(Long id) {
+        return productRepository.findById(id).get();
+    }
+
 }

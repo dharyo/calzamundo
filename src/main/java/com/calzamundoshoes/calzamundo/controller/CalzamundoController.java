@@ -1,14 +1,11 @@
 package com.calzamundoshoes.calzamundo.controller;
 
 import java.io.Console;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.calzamundoshoes.calzamundo.entity.*;
 import com.calzamundoshoes.calzamundo.service.*;
-
 import antlr.collections.List;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
@@ -30,14 +27,10 @@ public class CalzamundoController {
 
     }
 
-    /*
-     * public CalzamundoController(ProductService productService, UserService
-     * userService) {
-     * this.productService = productService;
-     * this.userService = userService;
-     * 
-     * }
-     */
+    public CalzamundoController(ProductService productService, SaleService saleService) {
+        this.productService = productService;
+        this.saleService = saleService;
+    }
 
     public CalzamundoController() {
 
@@ -72,21 +65,36 @@ public class CalzamundoController {
         model.addAttribute("product", productService.getAllProducts());
         return "inventory";
     }
+    // -----------------------------------------
 
-    @GetMapping("/sales")
-    public String listProductsSales(Model model) {
-        model.addAttribute("product", productService.getAllProducts());
+    @GetMapping("/createSalesp")
+    public String createSales(Model model) {
+        model.addAttribute("listProducts", productService.getAllProducts());
+        Sale product = new Sale();
+        model.addAttribute("product", product);
         return "sales";
     }
 
-    @GetMapping("/sales/{id}")
-    public String calculateSale(@PathVariable Long id, @ModelAttribute("product") Product product, Model model) {
+    @PostMapping("/saveSale/{id}")
+    public String updateProductdd(@PathVariable Long id, @ModelAttribute("product") Sale product, Model model) {
         Product existentProduct = productService.getProductByIdProduct(id);
+        existentProduct.setIdProduct(id);
+        int precio = Integer.parseInt(existentProduct.getPriceProduct());
+        int cantidad = product.getAmountSale();
+        long total = (cantidad * precio);
+        existentProduct.setAmountProduct(existentProduct.getAmountProduct() - cantidad);
+        productService.updateProduct(existentProduct);
+        Sale sale = new Sale();
+        sale.setAmountSale(cantidad);
+        sale.setProduct(existentProduct);
+        sale.setDateSale(null);
+        sale.setUser(null);
+        sale.setTotalSale(total);
+        sale.setCustomer(null);
 
-        int price = Integer.parseInt(existentProduct.getPriceProduct()) * 5;
-        System.out.println(price);
+        saleService.saveSale(sale);
+        return "redirect:/inventory";
 
-        return "redirect:/sales";
     }
 
     @GetMapping("/create")
@@ -104,8 +112,6 @@ public class CalzamundoController {
 
     @GetMapping("/update/{id}")
     public String editProductForm(@PathVariable Long id, Model model) {
-        System.out.println("entro a update");
-
         Product product = productService.getProductByIdProduct(id);
         model.addAttribute("product", product);
         return "update_shoes";
@@ -120,6 +126,7 @@ public class CalzamundoController {
         existentProduct.setDescripcionProduct(product.getDescripcionProduct());
         existentProduct.setTypeProduct(product.getTypeProduct());
         existentProduct.setSizeProduct(product.getSizeProduct());
+        existentProduct.setAmountProduct(product.getAmountProduct());
         existentProduct.setPriceProduct(product.getPriceProduct());
 
         productService.updateProduct(existentProduct);
@@ -137,15 +144,4 @@ public class CalzamundoController {
         return "login";
     }
 
-    /*
-     * @RequestMapping("/sales")
-     * public String ventas() {
-     * return "sales";
-     * }
-     * 
-     * @RequestMapping("/inventory")
-     * public String inventario() {
-     * return "inventory";
-     * }
-     */
 }

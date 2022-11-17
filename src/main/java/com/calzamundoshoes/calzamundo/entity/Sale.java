@@ -1,5 +1,7 @@
 package com.calzamundoshoes.calzamundo.entity;
 
+import java.util.Date;
+
 import javax.persistence.*;
 
 import lombok.Data;
@@ -13,9 +15,13 @@ public class Sale {
     private Long idSale;
 
     @Column(name = "total_sale", nullable = false)
-    private String totalSale;
+    private Long totalSale;
+    @Temporal(TemporalType.DATE)
     @Column(name = "date_sale")
-    private String dateSale;
+    private Date dateSale;
+
+    @Column(name = "amount_sale")
+    private int amountSale;
 
     /*
      * @OneToMany( targetEntity = Calzado.class)

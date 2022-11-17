@@ -30,7 +30,6 @@
   <body>
     <main class="flex-shrink-0">
       <!-- Navigation-->
-
       <nav class="navbar navbar-expand-lg" style="background-color: #f11167">
         <div class="container px-5">
           <a class="navbar-brand" href="/home">
@@ -88,60 +87,43 @@
         </div>
       </nav>
       <!-- Navigation-->
-      <!-- Navigation-->
+    <br><br>
     </main>
-    <!--body-->
     <div class="container mt-3">
       <div class="row">
-        <!--Inicio del card-->
         <div class="card text-center">
           <div class="card-body">
-            <h1 class="card-title">Calcular Venta</h1>
-
+            <h1 class="card-title">Realizar Venta</h1>
             <div class="d-grid4 form group">
-              <select
               
-              class="form-control"
-              >
-                <option 
-                th:each="prod:${product}"
-                th:value="${prod.idProduct}"
-                th:text="${prod.nameProduct}"
-                >Seleccionar Calzado</option>
-                
-              </select>
-              <input
-                class="contactus"
-                placeholder="Cantidad"
-                type="Search"
-                name="amount_sale"
-              />
-
-              <a
-                class="btn btn-primary btn-lg disabled"
-               
-              >
-                Calcular
-            </a>
-
-              <br>
-              <label ></label>
+              <table>
+                <tr  th:each="prod:${listProducts}">
+                  <form  th:action="@{/saveSale/{id} (id=${prod.idProduct})}"  th:object="${product}" method="post" id="contactForm" data-sb-form-api-token="API_TOKEN"> 
+                  <td th:text="${prod.nameProduct}"></td>
+                  <td><input 
+                    th:field="*{amountSale}"
+                    class="form-control contactus" 
+                    placeholder="Cantidad" data-sb-validations="required" />
+                    
+                  </td>
+                  <td>
+                    <button type="submit" class="btn btn-primary">Calcular</button>
+                  </td>
+                </form>
+                </tr>
+            </table>
             </div>
          
-            <br /><br /><br />
-            <br /><br /><br />
           </div>
           <br /><br /><br />
           <br /><br /><br />
         </div>
-        <br /><br /><br />
-        <!--Fin del card-->
+        
       </div>
     </div>
-    <!--Fin del contenedor-->
     <!-- Footer-->
     <br /><br /><br />
-    <br /><br /><br />
+
     <footer class="bg-dark py-4 mt-auto">
       <div class="container px-5">
         <div

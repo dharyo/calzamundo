@@ -43,13 +43,7 @@
           <div class="card-body">
             <h1 class="card-title">Iniciar Sesión</h1>
             <!--Inicio del formulario-->
-            <form th:action="@{/validateUser}" method="post">
-            <!-- <div th:if=${param.error}>
-                <div class="alert alert-danger">Usuario o contraseña incorrecto</div>
-              </div>
-              <div th:if=${param.logout}>
-                <div class="alert alert-info">Haz cerrado sesión exitosamente</div>
-              </div>--> 
+            <form th:action="@{/validateUser}" method="get">
               <div class="mb-3">
                 <img
                   src="../static/img/usuario.png"
@@ -62,7 +56,7 @@
                   <input
                  
                     type="text"
-                    name="nameUser"
+                    name="username"
                     class="form-control"
                     placeholder="Ingrese el email del usuario"
                   />
@@ -73,7 +67,7 @@
                   <input
                   
                     type="text"
-                    name="passwordEmployee"
+                    name="password"
                     class="form-control"
                     placeholder="Ingrese la contraseña del usuario"
                   />
@@ -90,6 +84,12 @@
                 </div>
               </div>
             </form>
+            <div th:if=${param.error}>
+              <div class="alert alert-danger">Usuario o contraseña incorrecto</div>
+            </div>
+            <div th:if=${param.logout}>
+              <div class="alert alert-info">Haz cerrado sesión exitosamente</div>
+            </div>
             <!--Fin del formulario-->
           </div>
         </div>

@@ -44,12 +44,12 @@ public class CalzamundoController {
      * }
      */
 
-    @RequestMapping("/")
+    @GetMapping({"/","/index"})
     public String index() {
         return "index";
     }
 
-    @RequestMapping("/home")
+    @GetMapping("/home")
     public String home() {
         return "home";
     }

@@ -43,44 +43,25 @@
           <div class="card-body">
             <h1 class="card-title">Iniciar Sesión</h1>
             <!--Inicio del formulario-->
-            <form th:action="@{/validateUser}" method="get">
+            <form th:action="@{/login}" method="post">
               <div class="mb-3">
-                <img
-                  src="../static/img/usuario.png"
-                  class="rounded"
-                  alt="..."
-                />
+                  <img src="../static/img/usuario.png" class="rounded" alt="..."/>
 
                 <div class="form-group">
-                  <label>Usuario</label>
-                  <input
-                 
-                    type="text"
-                    name="username"
-                    class="form-control"
-                    placeholder="Ingrese el email del usuario"
-                  />
+                    <label>Usuario</label>
+                    <input type="text" name="username" class="form-control" placeholder="Ingrese el email del usuario"/>
                 </div>
 
                 <div class="form-group">
-                  <label>Contraseña</label>
-                  <input
-                  
-                    type="text"
-                    name="password"
-                    class="form-control"
-                    placeholder="Ingrese la contraseña del usuario"
-                  />
+                    <label>Contraseña</label>
+                    <input type="password" name="password" class="form-control" placeholder="Ingrese la contraseña del usuario"/>
                 </div>
-                <br /><br />
+                  <br/><br/>
                 <div class="d-grid gap-2 d-md-block">
-                  <button class="btn btn-danger" type="button">Cancelar</button>
-
-                  <a href="/home">
-                    <button class="btn btn-success" type="button">
-                      Ingresar
-                    </button>
-                  </a>
+                    <a href="/index">
+                        <button class="btn btn-danger" type="button">Cancelar</button>
+                    </a>
+                      <button class="btn btn-success" type="submit">Ingresar</button>                 
                 </div>
               </div>
             </form>
